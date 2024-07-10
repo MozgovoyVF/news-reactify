@@ -5,24 +5,45 @@ import { getNews } from "../../api/api.news";
 import NewsList from "../../components/NewsList/NewsList";
 import NewsBanner from "../../components/NewsBanner/NewsBanner";
 import Skeleton from "../../components/Skeleton/Skeleton";
+import Pagination from "../../components/Pagination/Pagination";
 
 const Main = () => {
   const [news, setNews] = useState<News[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+  const pageSize = 10;
+
+  const fetchNews = async (currentPage: number) => {
+    try {
+      setIsLoading(true);
+      const data = await getNews(currentPage, pageSize);
+      setNews(data.news);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getNews();
-        setNews(data.news);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchNews();
-  }, []);
+    fetchNews(currentPage);
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handlePageClick = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <main className={styles.main}>
@@ -32,11 +53,27 @@ const Main = () => {
         <Skeleton count={1} type="banner" />
       )}
 
+      <Pagination
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+        handlePageClick={handlePageClick}
+        totalPages={totalPages}
+        currentPage={currentPage}
+      />
+
       {!isLoading ? (
         <NewsList news={news} />
       ) : (
         <Skeleton count={10} type="item" />
       )}
+
+      <Pagination
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+        handlePageClick={handlePageClick}
+        totalPages={totalPages}
+        currentPage={currentPage}
+      />
     </main>
   );
 };
