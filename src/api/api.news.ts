@@ -7,12 +7,14 @@ interface IResponse {
   pageNumber?: number;
   pageSize?: number;
   category?: string | null;
+  keywords?: string;
 }
 
 export const getNews = async ({
   pageNumber = 1,
   pageSize = 10,
   category,
+  keywords,
 }: IResponse) => {
   try {
     const response = await axios.get(`${BASE_URL}search`, {
@@ -21,6 +23,7 @@ export const getNews = async ({
         page_number: pageNumber,
         page_size: pageSize,
         category,
+        keywords,
       },
     });
 
