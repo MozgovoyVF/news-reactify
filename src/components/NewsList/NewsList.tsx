@@ -1,8 +1,9 @@
+import withSkeleton from "../../helpers/hoc/withSkeleton";
 import { News } from "../../types/news.types";
 import NewsItem from "../NewsItem/NewsItem";
 import styles from "./styles.module.css";
 
-interface INewsList {
+export interface INewsList {
   news: News[];
 }
 
@@ -16,4 +17,6 @@ const NewsList = ({ news }: INewsList) => {
   );
 };
 
-export default NewsList;
+const NewsListWithSkeleton = withSkeleton(NewsList, "item", 10, "column");
+
+export default NewsListWithSkeleton;

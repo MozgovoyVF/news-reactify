@@ -2,7 +2,7 @@ import { formatTimeAgo } from "../../helpers/formatTimeAgo";
 import Image from "../Image/Image";
 import styles from "./styles.module.css";
 
-interface INewsBanner {
+export interface INewsBanner {
   item: {
     title: string;
     published: string;
@@ -12,8 +12,6 @@ interface INewsBanner {
 }
 
 const NewsBanner = ({ item }: INewsBanner) => {
-  
-
   return (
     <div className={styles.banner}>
       <Image image={item.image} />
