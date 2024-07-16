@@ -4,7 +4,8 @@ import { INewsBanner } from "../../components/NewsBanner/NewsBanner";
 import { INewsList } from "../../components/NewsList/NewsList";
 
 function withSkeleton(
-  Component: FC<INewsBanner | INewsList>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Components: FC<any> ,
   type: "banner" | "item",
   count: number
 ) {
@@ -17,7 +18,7 @@ function withSkeleton(
       return <Skeleton type={type} count={count} />;
     }
 
-    return <Component {...restProps} />;
+    return <Components {...restProps} />;
   };
 }
 
