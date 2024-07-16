@@ -3,13 +3,18 @@ import styles from "./styles.module.css";
 interface ISkeleton {
   count?: number;
   type: "banner" | "item";
+  direction: "column" | "row";
 }
 
-const Skeleton = ({ count = 1, type }: ISkeleton) => {
+const Skeleton = ({ count = 1, type, direction = "column" }: ISkeleton) => {
   return (
     <>
       {count > 1 ? (
-        <ul className={styles.list}>
+        <ul
+          className={
+            direction === "column" ? styles.columnList : styles.rowList
+          }
+        >
           {[...Array(count)].map((_, index) => {
             return (
               <li
