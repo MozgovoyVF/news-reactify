@@ -3,6 +3,7 @@ import { useFetch } from "../../helpers/hooks/useFetch";
 import { IFilters } from "../../pages/Main/Main";
 import Categories from "../Categories/Categories";
 import Search from "../Search/Search";
+import Slider from "../Slider/Slider";
 import styles from "./styles.module.css";
 
 interface INewsFilter {
@@ -18,11 +19,15 @@ const NewsFilters = ({ filters, changeFilter }: INewsFilter) => {
   return (
     <div className={styles.filters}>
       {dataCategories.categories ? (
-        <Categories
-          categories={dataCategories.categories}
-          selectedCategory={filters.category}
-          setSelectedCategory={(category) => changeFilter("category", category)}
-        />
+        <Slider>
+          <Categories
+            categories={dataCategories.categories}
+            selectedCategory={filters.category}
+            setSelectedCategory={(category) =>
+              changeFilter("category", category)
+            }
+          />
+        </Slider>
       ) : null}
 
       <Search
