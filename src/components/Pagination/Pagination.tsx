@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-interface IPagination {
+export interface IPagination {
   currentPage: number;
   totalPages: number;
   handleNextPage: () => void;
