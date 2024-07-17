@@ -1,16 +1,18 @@
-import { News } from "../../types/news.types";
+import { getLatestNews } from "../../api/api.news";
+import { useFetch } from "../../helpers/hooks/useFetch";
 import BannersListWithSkeleton from "../BannersList/BannersList";
 import styles from "./styles.module.css";
 
-interface ILatestNews {
-  banners: News[];
-  isLoading: boolean;
-}
+const LatestNews = () => {
+  const { data, isLoading } = useFetch(getLatestNews);
 
-const LatestNews = ({ banners, isLoading }: ILatestNews) => {
+  console.log(data);
+
   return (
     <section className={styles.section}>
-      <BannersListWithSkeleton isLoading={isLoading} banners={banners} />
+      {data?.news && (
+        <BannersListWithSkeleton isLoading={isLoading} banners={data.news} />
+      )}
     </section>
   );
 };
