@@ -1,14 +1,10 @@
 import { formatTimeAgo } from "../../helpers/formatTimeAgo";
+import { News } from "../../types/news.types";
 import Image from "../Image/Image";
 import styles from "./styles.module.css";
 
 export interface INewsBanner {
-  item: {
-    title: string;
-    published: string;
-    author: string;
-    image?: string;
-  };
+  item: News;
 }
 
 const NewsBanner = ({ item }: INewsBanner) => {
