@@ -3,6 +3,7 @@ import { PAGE_SIZE, TOTAL_PAGES } from "../../constants/constants";
 import { useDebounce } from "../../helpers/hooks/useDebounce";
 import { useFetch } from "../../helpers/hooks/useFetch";
 import { useFilters } from "../../helpers/hooks/useFilters";
+import { INewsApiResponse, ParamsType } from "../../types/news.types";
 import NewsFilters from "../NewsFilters/NewsFilters";
 import NewsListWithSkeleton from "../NewsList/NewsList";
 import PaginationWrapper from "../PaginationWrapper/PaginationWrapper";
@@ -18,7 +19,7 @@ const NewsByFilters = () => {
 
   const debouncedKeywords = useDebounce(filters.keywords, 1500);
 
-  const { data, isLoading } = useFetch(getNews, {
+  const { data, isLoading } = useFetch<INewsApiResponse, ParamsType>(getNews, {
     ...filters,
     keywords: debouncedKeywords,
   });
@@ -51,7 +52,7 @@ const NewsByFilters = () => {
     <section className={styles.section}>
       <NewsFilters changeFilter={changeFilter} filters={filters} />
 
-      <PaginationWrapper top bottom paginationProps={paginationProps}>
+      <PaginationWrapper top bottom {...paginationProps}>
         {data?.news ? (
           <NewsListWithSkeleton isLoading={isLoading} news={data?.news} />
         ) : null}

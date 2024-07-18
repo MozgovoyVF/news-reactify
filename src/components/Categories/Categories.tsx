@@ -1,14 +1,18 @@
-import { forwardRef } from "react";
+import { ForwardedRef, forwardRef } from "react";
 import styles from "./styles.module.css";
+import { CategoriesType } from "../../types/news.types";
 
 interface ICategories {
-  categories: string[];
-  setSelectedCategory: (category: string | null) => void;
-  selectedCategory: string | null;
+  categories: CategoriesType[];
+  setSelectedCategory: (category: CategoriesType | null) => void;
+  selectedCategory: CategoriesType | null;
 }
 
 const Categories = forwardRef<HTMLDivElement, ICategories>(
-  ({ categories, setSelectedCategory, selectedCategory }: ICategories, ref) => {
+  (
+    { categories, setSelectedCategory, selectedCategory }: ICategories,
+    ref: ForwardedRef<HTMLDivElement>
+  ) => {
     return (
       <div ref={ref} className={styles.categories}>
         <button

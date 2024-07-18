@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IFilters } from "../../pages/Main/Main";
+import { IFilters } from "../../types/news.types";
 
 export const useFilters = (initialFilters: IFilters) => {
   const [filters, setFilters] = useState<IFilters>(initialFilters);

@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 
 interface IImage {
-  image?: string;
+  image: string;
 }
 
 const Image = ({ image }: IImage) => {
