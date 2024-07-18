@@ -1,12 +1,17 @@
+import { DirectionType, SkeletonType } from "../../types/news.types";
 import styles from "./styles.module.css";
 
 interface ISkeleton {
   count?: number;
-  type: "banner" | "item";
-  direction: "column" | "row";
+  type?: SkeletonType;
+  direction?: DirectionType;
 }
 
-const Skeleton = ({ count = 1, type, direction = "column" }: ISkeleton) => {
+const Skeleton = ({
+  count = 1,
+  type = "banner",
+  direction = "column",
+}: ISkeleton) => {
   return (
     <>
       {count > 1 ? (

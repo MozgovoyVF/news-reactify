@@ -1,6 +1,6 @@
 import { getCategories } from "../../api/api.news";
 import { useFetch } from "../../helpers/hooks/useFetch";
-import { IFilters } from "../../pages/Main/Main";
+import { ICategoriesApiResponse, IFilters } from "../../types/news.types";
 import Categories from "../Categories/Categories";
 import Search from "../Search/Search";
 import Slider from "../Slider/Slider";
@@ -12,13 +12,13 @@ interface INewsFilter {
 }
 
 const NewsFilters = ({ filters, changeFilter }: INewsFilter) => {
-  const { data: dataCategories } = useFetch(getCategories, {
-    category: filters.category,
-  });
+  const { data: dataCategories } = useFetch<ICategoriesApiResponse, null>(
+    getCategories
+  );
 
   return (
     <div className={styles.filters}>
-      {dataCategories.categories ? (
+      {dataCategories?.categories ? (
         <Slider>
           <Categories
             categories={dataCategories.categories}

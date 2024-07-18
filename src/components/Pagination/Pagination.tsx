@@ -1,12 +1,5 @@
+import { IPagination } from "../../types/news.types";
 import styles from "./styles.module.css";
-
-export interface IPagination {
-  currentPage: number;
-  totalPages: number;
-  handleNextPage: () => void;
-  handlePreviousPage: () => void;
-  handlePageClick: (number: number) => void;
-}
 
 const Pagination = ({
   currentPage,

@@ -1,13 +1,9 @@
 import { formatTimeAgo } from "../../helpers/formatTimeAgo";
+import { News } from "../../types/news.types";
 import styles from "./styles.module.css";
 
 interface INewsItem {
-  item: {
-    title: string;
-    published: string;
-    author: string;
-    image?: string;
-  };
+  item: News;
 }
 
 const NewsItem = ({ item }: INewsItem) => {
