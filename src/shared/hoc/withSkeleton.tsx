@@ -4,22 +4,22 @@ import Skeleton from "../ui/Skeleton/Skeleton";
 
 export interface IWithSkeleton {
   isLoading: boolean;
+  direction?: DirectionType;
+  type?: SkeletonType;
 }
 
 function withSkeleton<P extends object>(
   Components: ComponentType<P>,
-  type?: SkeletonType,
-  count?: number,
-  direction?: DirectionType
+  count?: number
 ) {
   return function WithSkeleton(props: P & IWithSkeleton) {
-    const { isLoading, ...restProps } = props;
+    const { isLoading, type, direction = "column", ...restProps } = props;
 
     if (isLoading) {
       return <Skeleton type={type} count={count} direction={direction} />;
     }
 
-    return <Components {...(restProps as P)} />;
+    return <Components type={type} {...(restProps as P)} />;
   };
 }
 
